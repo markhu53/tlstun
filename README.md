@@ -28,6 +28,7 @@ webserver
 without go modules
 
 go get github.com/jsimonetti/tlstun/cli
+
 go build -o tlstun main.go
 
 Contributions to this project are welcomed!
