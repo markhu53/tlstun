@@ -24,5 +24,8 @@ traffic.
 - add passthrough functionality to server to allow running it in front of an existing
 webserver
 
+### build with no go modules
+go get github.com/jsimonetti/tlstun/cli
+go build -o tlstun main.go
 
 Contributions to this project are welcomed!
