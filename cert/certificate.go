@@ -49,7 +49,7 @@ func (c *Certificate) CertString() string {
 }
 
 func (c *Certificate) CertToFile(filename string) error {
-	certOut, err := os.OpenFile(filename, os.O_CREATE, 0644)
+	certOut, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		return err
 	}
@@ -65,7 +65,7 @@ func (c *Certificate) KeyString() string {
 }
 
 func (c *Certificate) KeyToFile(filename string) error {
-	keyOut, err := os.OpenFile(filename, os.O_CREATE, 0600)
+	keyOut, err := os.OpenFile(filename, os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
 		return err
 	}
@@ -93,9 +93,9 @@ func CreateCaCertificate() (cert Certificate, err error) {
 		NotBefore:             validFrom,
 		NotAfter:              validTo,
 		BasicConstraintsValid: true,
-		IsCA:        true,
-		ExtKeyUsage: []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
-		KeyUsage:    x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
+		IsCA:                  true,
+		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth, x509.ExtKeyUsageServerAuth},
+		KeyUsage:              x509.KeyUsageDigitalSignature | x509.KeyUsageCertSign,
 	}
 
 	if cert.Key, err = rsa.GenerateKey(rand.Reader, 4096); err != nil {

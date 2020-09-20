@@ -25,10 +25,15 @@ traffic.
 webserver
 
 ### BUILD
-without go modules
-
 go get github.com/jsimonetti/tlstun/cli
-
 go build -o tlstun main.go
+
+### CA
+
+openssl genrsa -out rootca.key 4096
+
+openssl req -sha256 -new -x509 -days 1826 -key rootca.key -out rootca.crt
+
+tlstun certificate ca --certfile ./rootca.crt --keyfile ./rootca.key --cacert ./ca.crt --cakey ./ca.key
 
 Contributions to this project are welcomed!
